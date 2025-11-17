@@ -51,11 +51,36 @@ public class prueba_tecnica_traine {
     }
 
     public static void mostrarAsientos(char[][] asientos) {
-        System.out.println("Estado de los asientos (l = libre, o = ocupado):");
-        for (int i = 0; i < 10; i++) {
-            System.out.print((i) + ": ");
-            for (int j = 0; j < 10; j++) {
-                System.out.print(asientos[i][j] + " | ");
+        final String RESET = "\u001B[0m";
+        final String GREEN = "\u001B[32m";
+        final String RED = "\u001B[31m";
+        final String CYAN = "\u001B[36m";
+        int filas = asientos.length;
+        int cols = (filas > 0) ? asientos[0].length : 0;
+
+        System.out.println(CYAN + "Estado de los asientos:" + RESET);
+        System.out.println("Leyenda: " + GREEN + "L" + RESET + " = libre, " + RED + "O" + RESET + " = ocupado");
+        // Cabecera de columnas
+        System.out.print("    ");
+        for (int j = 0; j < cols; j++) {
+            System.out.printf(" %2d ", j);
+        }
+        System.out.println();
+        // Separador
+        System.out.print("   ");
+        for (int j = 0; j < cols; j++) {
+            System.out.print("----");
+        }
+        System.out.println();
+
+        // Filas con colores
+        for (int i = 0; i < filas; i++) {
+            System.out.printf("%2d |", i);
+            for (int j = 0; j < cols; j++) {
+                char c = asientos[i][j];
+                String color = (c == 'L' || c == 'l') ? GREEN : RED;
+                String display = String.valueOf(Character.toUpperCase(c));
+                System.out.print(" " + color + display + RESET + " |");
             }
             System.out.println();
         }
